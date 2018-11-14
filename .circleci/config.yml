@@ -35,12 +35,22 @@ jobs:
             command: mvn integration-test
 
         - run:
-            name: Create Test Directory
-            command: mkdir -p $CIRCLE_TEST_REPORTS/junit/
+            name: Unit Tests
+            command: mvn test
 
-        - run:
-            name: Peform Unit Tests
-            command: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+        - store_artifacts:
+            path: target/surefire-reports
+            destination: tr1
+        - store_test_results:
+            path: target/surefire-reports
+
+        # - run:
+        #     name: Create Test Directory
+        #     command: mkdir -p $CIRCLE_TEST_REPORTS/junit/
+
+        # - run:
+        #     name: Peform Unit Tests
+        #     command: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
 workflows:
   version: 2
