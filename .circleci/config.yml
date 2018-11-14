@@ -43,3 +43,9 @@ jobs:
       steps:
           - run: mkdir -p $CIRCLE_TEST_REPORTS/junit/
           - run: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
