@@ -40,5 +40,7 @@ jobs:
       # run tests!
       - run: mvn integration-test
 
-      - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-      - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    test:
+      steps:
+        - run: mkdir -p $CIRCLE_TEST_REPORTS/junit/
+        - run: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
