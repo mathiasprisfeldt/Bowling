@@ -25,10 +25,22 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
   test:
+    docker:
+        - image: circleci/openjdk:8-jdk
     steps:
-        - run: mvn integration-test
-        - run: mkdir -p $CIRCLE_TEST_REPORTS/junit/
-        - run: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+        - checkout
+
+        - run:
+            name: Integration Test
+            command: mvn integration-test
+
+        - run:
+            name: Create Test Directory
+            command: mkdir -p $CIRCLE_TEST_REPORTS/junit/
+
+        - run:
+            name: Peform Unit Tests
+            command: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 
 workflows:
   version: 2
