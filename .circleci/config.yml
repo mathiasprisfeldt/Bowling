@@ -34,9 +34,9 @@ jobs:
             name: Integration Test
             command: mvn integration-test
 
-        # - run:
-        #     name: Unit Tests
-        #     command: mvn test
+        - run:
+            name: Unit Tests
+            command: mvn test
 
         - store_artifacts:
             path: target/surefire-reports
